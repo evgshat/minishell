@@ -224,4 +224,5 @@ void my_programm(char **name_cmd, t_data *data)
         temp = temp + 1;
     // }
     // check merge
+    // PR for Danechka
 }
