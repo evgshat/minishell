@@ -5,46 +5,88 @@ FLAGS		=	-Wall -Wextra -Werror -g
 RM			=	rm -rf
 
 #FILES AND PATH
-HDRS		=	minishell.h funtions.c
+HDRS		=	functions.h\
+                minishell.h
 DIR_HDRS	=	includes/
 HDRS_PATH	=	$(addprefix $(DIR_HDRS), $(HDRS))
 
-FNCS		=	ft_strlen.c ft_memcpy.c ft_split.c ft_strdup.c ft_strncmp.c ft_strjoin.c ft_putstr_fd.c
+FNCS		=	ft_memcpy.c\
+                ft_putstr_fd.c\
+                ft_split.c\
+                ft_strdup.c\
+                ft_strjoin.c\
+                ft_strlen.c\
+                ft_strncmp.c
 DIR_FNCS	=	functions/
+DIRS		=	$(DIR_FNCS)
 FNCS_PATH	=	$(addprefix $(DIR_FNCS), $(FNCS))
-FNCS_OBJ	=	$(FNCS_PATH:.c=.o)
+SRCS 		= 	$(FNCS_PATH)
 
-SRCS		=	minishell.c copy_env.c creat_env_element.c cmd_export.c cmd_unset.c cmd_pwd.c cmd_cd.c cmd_echo.c exec_bin.c redirect.c my_programm.c new_copy_env.c
-DIR_SRCS	=	sources/
-SRCS_PATH	=	$(addprefix $(DIR_SRCS), $(SRCS))
-SRCS_OBJ	=	$(SRCS_PATH:.c=.o)
+
+CMDS		=	cmd_cd.c\
+                cmd_echo.c\
+                cmd_export.c\
+                cmd_pwd.c\
+                cmd_unset.c\
+                copy_env.c\
+                creat_env_element.c\
+                exec_bin.c\
+                minishell.c\
+                my_programm.c\
+                new_copy_env.c\
+                redirect.c
+DIR_CMDS	=	sources/
+DIRS		+=	$(DIR_CMDS)
+CMDS_PATH	=	$(addprefix $(DIR_CMDS), $(CMDS))
+SRCS 		+= 	$(CMDS_PATH)
 
 PARS		=	common_parsing.c
 DIR_PARS	=	parsing/
+DIRS		+=	$(DIR_PARS)
 PARS_PATH	=	$(addprefix $(DIR_PARS), $(PARS))
-PARS_OBJ	=	$(PARS_PATH:.c=.o)
+SRCS 		+= 	$(PARS_PATH)
 
-#COMMANDS
-$(NAME):		$(FNCS_OBJ) $(SRCS_OBJ) $(PARS_OBJ)
-				$(CC) ${FLAGS} -I $(DIR_HDRS) -I readline $(FNCS_OBJ) $(SRCS_OBJ) $(PARS_OBJ) readline/libhistory.a readline/libreadline.a -ltermcap -o $(NAME)
-				@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
-
-%.o: %.c $(HDRS_PATH) Makefile
-				${CC} -I $(DIR_HDRS) -I readline  -c $< -o $@
+DIR_OBJ 	=	objs/
+DIR_SRC		=	srcs/
+OBJS		=	$(patsubst %.c, %.o, $(SRCS))
+DIR_OBJS	=	$(addprefix $(DIR_OBJ), $(DIRS))
+PATH_OBJS	=	$(addprefix $(DIR_OBJ), $(OBJS))
 
 all:			$(NAME)
 
+#COMMANDS
+$(NAME):		write_logo $(DIR_OBJS) $(PATH_OBJS)
+				@$(CC) $(FLAGS) -I $(DIR_HDRS) -I readline $(PATH_OBJS) readline/libhistory.a readline/libreadline.a -ltermcap -o $(NAME)
+				@echo "$(GREEN)\n$(NAME) created!$(DEFAULT)"
+
+write_logo:
+				@echo "$(GREEN)\n\
+███╗░░░███╗██╗███╗░░██╗██╗░██████╗██╗░░██╗███████╗██╗░░░░░██╗░░░░░\n\
+████╗░████║██║████╗░██║██║██╔════╝██║░░██║██╔════╝██║░░░░░██║░░░░░\n\
+██╔████╔██║██║██╔██╗██║██║╚█████╗░███████║█████╗░░██║░░░░░██║░░░░░\n\
+██║╚██╔╝██║██║██║╚████║██║░╚═══██╗██╔══██║██╔══╝░░██║░░░░░██║░░░░░\n\
+██║░╚═╝░██║██║██║░╚███║██║██████╔╝██║░░██║███████╗███████╗███████╗\n\
+╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝╚═════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚══════╝\n\
+				$(DEFAULT)"
+
+$(DIR_OBJS):
+				@mkdir -p $(DIR_OBJS)
+
+$(DIR_OBJ)%.o:	$(DIR_SRC)%.c $(HDRS_PATH) Makefile
+				@$(CC) $(FLAGS) -I $(DIR_HDRS) -I readline  -c $< -o $@
+				@echo "$(GREEN)...$(DEFAULT)\c"
+
 clean:
-				@$(RM) $(FNCS_OBJ) $(SRCS_OBJ) $(PARS_OBJ)
-				@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
+				@$(RM) $(DIR_OBJ)
+				@echo "$(YELLOW)object files deleted!$(DEFAULT)"
 
 fclean:			clean
 				@$(RM) $(NAME)
-				@echo -e "$(RED)all deleted!$(DEFAULT)"
+				@echo "$(RED)all deleted!$(DEFAULT)"
 
 re:				fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re write_logo
 
 #COLORS
 RED = \033[1;31m

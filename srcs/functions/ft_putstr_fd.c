@@ -1,4 +1,4 @@
-#include "../includes/functions.h"
+#include "../../includes/functions.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

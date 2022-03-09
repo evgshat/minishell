@@ -18,7 +18,33 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6780b4a7-4346-40c8-9137-e80e83b20313" name="Default Changelist" comment="Makefile objs dir created, added silent, fixed small bugs" />
+    <list default="true" id="6780b4a7-4346-40c8-9137-e80e83b20313" name="Default Changelist" comment="Makefile objs dir created, added silent, fixed small bugs">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_memcpy.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_memcpy.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_putstr_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_putstr_fd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_split.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_split.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_strdup.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strdup.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_strjoin.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strjoin.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_strlen.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strlen.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/ft_strncmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strncmp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing/common_parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parsing/common_parsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/cmd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_cd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/cmd_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/cmd_export.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_export.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/cmd_pwd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_pwd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/cmd_unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_unset.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/copy_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/copy_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/creat_env_element.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/creat_env_element.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/exec_bin.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/exec_bin.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/minishell.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/my_programm.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/my_programm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/new_copy_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/new_copy_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/redirect.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/redirect.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +181,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646837756214</updated>
-      <workItem from="1646837762939" duration="6874000" />
+      <workItem from="1646837762939" duration="7373000" />
     </task>
     <task id="LOCAL-00001" summary="Makefile objs dir created, added silent, fixed small bugs">
       <created>1646854286184</created>

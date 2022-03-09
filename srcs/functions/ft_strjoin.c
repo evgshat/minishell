@@ -1,4 +1,4 @@
-#include "../includes/functions.h"
+#include "../../includes/functions.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

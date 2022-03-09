@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	cmd_echo(char *flag, char *str)
 {

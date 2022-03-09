@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/functions.h"
+#include "../../includes/functions.h"
 
 static size_t	words_count(char *s, char c)
 {

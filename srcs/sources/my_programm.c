@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void run_cmd(char **name_cmd, t_data *data)
 {
@@ -35,7 +35,7 @@ char *find_path_ex(char *all_path, char *prog_name)
 {
     char *path_for_ex;
     char **mass_path;
-    int  res_ex;
+//    int  res_ex;
     struct dirent *file;
     DIR *dir;
     int i;
@@ -78,7 +78,7 @@ char *value_from_env(char *field, t_env *sh_env, char *prog_name)
 {
     t_env   *temp;
     int     len;
-    char    *path_for_ex;
+//    char    *path_for_ex;
 
     temp = sh_env;
     
@@ -98,6 +98,7 @@ int count_str(t_env *env)
     int res;
 
     temp = env;
+    res = 0;
     while (temp)
     {
         res++;
@@ -198,7 +199,7 @@ void run_pipe(char **name_cmd, t_data *data)
 
 void my_programm(char **name_cmd, t_data *data)
 {
-    int fd[2];
+//    int fd[2];
     t_data *temp;
 
 
