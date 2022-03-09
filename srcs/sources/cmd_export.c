@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 // какая-то тема, что что-то там должно быть в алфавитном порядке
 

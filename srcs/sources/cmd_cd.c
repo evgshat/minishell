@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*find_home(char *pwd)
 {
@@ -38,6 +38,7 @@ void	cmd_cd(char *str)
 	// path = malloc(sizeof(char) * PWD_MAX);
 	// if (!path)
 	// 	exit(1);
+	path = NULL;
 	path = getcwd(path, PWD_MAX);
 	if (!path)
 		exit(1);
