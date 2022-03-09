@@ -223,4 +223,5 @@ void my_programm(char **name_cmd, t_data *data)
         dup2(data->cmd->old_fd_in, 0);
         temp = temp + 1;
     // }
+    // check merge
 }
