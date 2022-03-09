@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcaffere <bcaffere@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 17:54:38 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/02/09 17:54:40 by bcaffere         ###   ########.fr       */
+/*   Created: 2022/02/09 17:54:42 by bcaffere          #+#    #+#             */
+/*   Updated: 2022/02/09 17:54:44 by bcaffere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/functions.h"
+#include "../../includes/functions.h"
 
-char	*ft_strdup(const char *src)
+size_t	ft_strlen(const char *str)
 {
-	char	*cp;
-	size_t	len;
+	size_t	i;
 
-	len = ft_strlen(src) + 1;
-	cp = (char *)malloc(sizeof(char) * len);
-	if (!cp)
-		return (NULL);
-	ft_memcpy(cp, src, len);
-	return (cp);
+	i = 0;
+	if (*str)
+		while (str[i])
+			i++;
+	return (i);
 }
