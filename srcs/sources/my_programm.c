@@ -81,7 +81,7 @@ char *value_from_env(char *field, t_env *sh_env, char *prog_name)
 //    char    *path_for_ex;
 
     temp = sh_env;
-    
+
     while (temp)
     {
         len = ft_strlen(temp->arg) + 1;
@@ -168,7 +168,7 @@ void run_redirect(t_data *data)
         }
         else if (data->cmd->is_left == 1 || data->cmd->is_dub_left == 1)
         {
-            dup2(data->cmd->fd_in, 0); 
+            dup2(data->cmd->fd_in, 0);
             close(data->cmd->fd_in);
         }
     }
@@ -204,8 +204,8 @@ void my_programm(char **name_cmd, t_data *data)
 
 
     temp = data;
-    while (*(temp->cmd->name_cmd) != NULL)
-    {
+    // while (*(temp->cmd->name_cmd) != NULL)
+    // {
         if (data->cmd->is_pipe > 0)
         {
             while (data->cmd->count_pipe != 0)
@@ -222,5 +222,5 @@ void my_programm(char **name_cmd, t_data *data)
         dup2(data->cmd->old_fd_out, 1);
         dup2(data->cmd->old_fd_in, 0);
         temp = temp + 1;
-    }
+    // }
 }
