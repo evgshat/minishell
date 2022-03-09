@@ -28,6 +28,7 @@ CMDS		=	cmd_cd.c\
                 cmd_export.c\
                 cmd_pwd.c\
                 cmd_unset.c\
+                cmd_exit.c\
                 copy_env.c\
                 creat_env_element.c\
                 exec_bin.c\
