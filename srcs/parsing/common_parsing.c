@@ -104,31 +104,56 @@ void is_r_redirect(t_data *data, char **mass)
 	}
 }
 
-int	is_redirect(t_data *data, char **mass)
+char	*is_redirect(t_data *data, char **mass)
 {
-	char **temp;
+	int	i;
 
-	temp = mass;
-	while (*temp != NULL)
+	i = 0;
+	while (mass[i] != NULL)
 	{
-		if (ft_strncmp(*temp, ">", 2) == 0 || ft_strncmp(*temp, "<", 2) == 0
-		|| ft_strncmp(*temp, ">>", 3) == 0 || ft_strncmp(*temp, "<<", 3) == 0)
+		if (ft_strncmp(mass[i], ">", 2) == 0 || ft_strncmp(mass[i], "<", 2) == 0
+		|| ft_strncmp(mass[i], ">>", 3) == 0 || ft_strncmp(mass[i], "<<", 3) == 0)
 		{
 			data->cmd->is_redirect = 1;
 			data->cmd->count_redirect++;
+			return(mass[i]);
 		}
-		temp = temp + 1;
+		i++;
 	}
 	is_l_redirect(data, data->cmd->name_cmd);
 	is_r_redirect(data, data->cmd->name_cmd);
 	data->cmd->old_fd_in = dup(STDIN_FILENO);
 	data->cmd->old_fd_out = dup(STDOUT_FILENO);
-	if (data->cmd->count_redirect > 0)
-		return (EXIST);
-	else
-		return (NOT_EXIST);
-	return (NOT_EXIST);
+	return (NULL);
 }
+
+int	is_quotes(t_data *data)
+{
+	char	*temp_line;
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	temp_line = data->line;
+	while (temp_line[i] != '\0')
+	{
+		if (temp_line[i] == '"')
+			count++;
+		if (count == 2)
+			break;
+		i++;
+	}
+	if (count == 1)
+	{
+		printf("error\none_quotes\n");
+		exit(1);
+	}
+	else if (count == 2)
+		return (1);
+	return (0);
+}
+
 
 void	common_parsing(t_data *data)
 {
@@ -140,8 +165,10 @@ void	common_parsing(t_data *data)
 	// data->cmd = malloc(sizeof(char *) * 10000); //
 	data->cmd->name_cmd = create_mas(data->line);
 	temp = data->cmd->name_cmd;
+	is_quotes(data);
 	is_pipe(data, data->cmd->name_cmd);
-	is_redirect(data, data->cmd->name_cmd);
+	if (is_redirect(data, data->cmd->name_cmd) != NULL)
+		run_redirect(data->cmd->name_cmd);
 	is_cmd(data, data->cmd->name_cmd);
 }
 

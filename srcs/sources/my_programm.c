@@ -26,17 +26,17 @@ void run_cmd(char **name_cmd, t_data *data)
         if (ft_strncmp(*name_cmd, "env", 4) == 0)
             env_print(data->sh_env);
         if (ft_strncmp(*name_cmd, "export", 7) == 0)
-            cmd_export("TEST=test", &data->sh_env);
+            cmd_export(*(name_cmd + 1), &data->sh_env);
         if (ft_strncmp(*name_cmd, "unset", 7) == 0)
-            cmd_unset("TMPDIR", &data->sh_env);
+            cmd_unset(*(name_cmd + 1), &data->sh_env);
         if (ft_strncmp(*name_cmd, "pwd", 4) == 0)
             cmd_pwd();
         if (ft_strncmp(*name_cmd, "cd", 3) == 0)
-            cmd_cd("/");
+            cmd_cd(*(name_cmd + 1));
         if (ft_strncmp(*name_cmd, "echo", 5) == 0)
             cmd_echo(name_cmd);
         if (ft_strncmp(*name_cmd, "./", 3) == 0)
-            exec_bin("text.txt", &data->sh_env);
+            exec_bin(*(name_cmd + 1), &data->sh_env);
     }
     // printf("end cmd\n");
 }

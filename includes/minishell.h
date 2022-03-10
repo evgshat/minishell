@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:07:48 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/10 01:42:00 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 17:50:22 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ void	common_parsing(t_data *data);
 
 /* my_shell */
 void my_programm(char **name_cmd, t_data *data);
+
+/* do reditect/pipe/execve */
+void run_redirect(t_data *data);
 
 
 #endif
