@@ -1,17 +1,14 @@
 #include "../../includes/minishell.h"
 
-void	cmd_echo(char *flag, char *str)
+void	cmd_echo(char **str)
 {
-	if (flag != NULL)
+	if (*(str + 1) && *(str + 2))
 	{
-		if (ft_strncmp(flag, "-n", 3) == 0)
-			printf("%s", str);
+		if (ft_strncmp(*(str + 1), "-n", 3) == 0)
+				printf("%s\n", *(str + 2));
 	}
-	else
-	{
-		printf("%s", str);
-		printf("\n");
-	}
+	else if (*(str + 1))
+		printf("%s\n", *(str + 1));
 }
 
-// я хз
+// check -n

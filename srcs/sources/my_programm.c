@@ -1,32 +1,42 @@
 #include "minishell.h"
 
+int	check_cmd(char *name_cmd)
+{
+	if (name_cmd)
+	{
+		if (ft_strncmp(name_cmd, "cd", 3) == 0
+		|| ft_strncmp(name_cmd, "pwd", 4) == 0
+		|| ft_strncmp(name_cmd, "echo", 5) == 0
+		|| ft_strncmp(name_cmd, "exit", 5) == 0
+		|| ft_strncmp(name_cmd, "export", 7) == 0
+		|| ft_strncmp(name_cmd, "unset", 6) == 0
+		|| ft_strncmp(name_cmd, "env", 4) == 0
+		|| ft_strncmp(name_cmd, "./", 3) == 0)
+			return (1);
+	}
+	return (0);
+}
+
 void run_cmd(char **name_cmd, t_data *data)
 {
     if (data->cmd->is_cmd == 1)
     {
-        while (*name_cmd != NULL)
-        {
-            if (ft_strncmp(*name_cmd, "exit", 5) == 0) //handle exit
-            {
-                printf("exit\n");
-                exit(0); // what about free() ?
-            }
-            if (ft_strncmp(*name_cmd, "env", 4) == 0) //handle envp
-                env_print(data->sh_env);
-            if (ft_strncmp(*name_cmd, "export", 7) == 0) //handle export
-                cmd_export("TEST=test", &data->sh_env); // "USER=test" depends on parsing
-            if (ft_strncmp(*name_cmd, "unset", 7) == 0) //handle export
-                cmd_unset("TMPDIR", &data->sh_env); // "USER" depends on parsing
-            if (ft_strncmp(*name_cmd, "pwd", 4) == 0)
-                cmd_pwd();
-            if (ft_strncmp(*name_cmd, "cd", 3) == 0)
-                cmd_cd("/");
-            if (ft_strncmp(*name_cmd, "echo", 5) == 0)
-                cmd_echo("-n", "hello\nworld\n");
-            if (ft_strncmp(*name_cmd, "./", 3) == 0)
-                exec_bin("text.txt", &data->sh_env);
-            name_cmd = name_cmd + 1;
-        }
+        if (ft_strncmp(*name_cmd, "exit", 5) == 0)
+            cmd_exit();
+        if (ft_strncmp(*name_cmd, "env", 4) == 0)
+            env_print(data->sh_env);
+        if (ft_strncmp(*name_cmd, "export", 7) == 0)
+            cmd_export(*(name_cmd + 1), &data->sh_env);
+        if (ft_strncmp(*name_cmd, "unset", 7) == 0)
+            cmd_unset(*(name_cmd + 1), &data->sh_env);
+        if (ft_strncmp(*name_cmd, "pwd", 4) == 0)
+            cmd_pwd();
+        if (ft_strncmp(*name_cmd, "cd", 3) == 0)
+            cmd_cd(*(name_cmd + 1));
+        if (ft_strncmp(*name_cmd, "echo", 5) == 0)
+            cmd_echo(name_cmd);
+        if (ft_strncmp(*name_cmd, "./", 3) == 0)
+            exec_bin(*(name_cmd + 1), &data->sh_env);
     }
     // printf("end cmd\n");
 }
@@ -35,14 +45,12 @@ char *find_path_ex(char *all_path, char *prog_name)
 {
     char *path_for_ex;
     char **mass_path;
-//    int  res_ex;
     struct dirent *file;
     DIR *dir;
     int i;
 
     i = -1;
-    // dir = NULL;
-    // file = NULL;
+    path_for_ex = NULL;
     mass_path = ft_split(all_path, ':');
     while (mass_path[++i] != NULL)
     {
@@ -78,10 +86,8 @@ char *value_from_env(char *field, t_env *sh_env, char *prog_name)
 {
     t_env   *temp;
     int     len;
-//    char    *path_for_ex;
 
     temp = sh_env;
-
     while (temp)
     {
         len = ft_strlen(temp->arg) + 1;
@@ -120,6 +126,8 @@ char **convert_env(t_env *env)
     i = 0;
     count = count_str(env);
     res = malloc(sizeof(char *) * (count + 1));
+    if (!res)
+        printf("error_malloc\n");
     while (temp)
     {
         new_str = ft_strjoin(temp->arg, "=");
@@ -134,25 +142,28 @@ char **convert_env(t_env *env)
     return (res);
 }
 
-void run_execve(t_data *data)
+void run_execve(char **name_cmd, t_data *data)
 {
     char    **env_for_ex;
     char    *path;
-    char    *argv[2];
     char    **temp;
-    pid_t pid;
+    char    *argv[2];
+    pid_t   pid;
+    int     res_check_cmd;
+    int     res_of_execve;
 
-    printf("run_execve\n");
-    argv[0] = "ls";
+    argv[0] = *name_cmd;
     argv[1] = NULL;
     pid = fork();
-    if (pid == 0)
+    res_of_execve = 666;
+    res_check_cmd = check_cmd(*name_cmd);
+    if (pid == 0 && res_check_cmd == 0)
     {
-         env_for_ex = convert_env(data->sh_env);
-         path = value_from_env("PATH\0", data->sh_env, *(data->cmd->name_cmd));
-        //  printf("path = %s\n", path);
-         temp = env_for_ex;
-         execve(path, data->cmd->name_cmd, env_for_ex); //
+        env_for_ex = convert_env(data->sh_env);
+        path = value_from_env("PATH\0", data->sh_env, *name_cmd);
+        temp = env_for_ex;
+        execve(path, argv, env_for_ex);
+
     }
     waitpid(pid, 0, 0); // поменять второй ноль (на код завершения программы для execve)
 }
@@ -174,7 +185,6 @@ void run_redirect(t_data *data)
     }
 }
 
-// echo "123" | wc -l
 void run_pipe(char **name_cmd, t_data *data)
 {
     pid_t   pid;
@@ -192,20 +202,18 @@ void run_pipe(char **name_cmd, t_data *data)
         dup2(fd[1], 1);
         run_cmd(name_cmd, data);
         run_redirect(data);
-        run_execve(data);
+        // run_execve(data);
         exit(1);
     }
 }
 
 void my_programm(char **name_cmd, t_data *data)
 {
-//    int fd[2];
     t_data *temp;
 
-
     temp = data;
-    // while (*(temp->cmd->name_cmd) != NULL)
-    // {
+    while (*name_cmd)
+    {
         if (data->cmd->is_pipe > 0)
         {
             while (data->cmd->count_pipe != 0)
@@ -217,12 +225,10 @@ void my_programm(char **name_cmd, t_data *data)
         }
         if (data->cmd->is_redirect > 0)
             run_redirect(data);
-        run_execve(data);
+        run_execve(name_cmd, data);
         run_cmd(name_cmd, data);
         dup2(data->cmd->old_fd_out, 1);
         dup2(data->cmd->old_fd_in, 0);
-        temp = temp + 1;
-    // }
-    // check merge
-    // PR for Danechka
+        name_cmd = name_cmd + 1;
+    }
 }
