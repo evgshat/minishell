@@ -94,15 +94,11 @@ int	check_good_line(char *str)
 	return (0);
 }
 
-int main(int argc, char *argv[], char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	(void)envp;
 	t_data	data;
 
-	// copy envp in self envp !!!
-	//env_pars(envp);
-	init_date(&data, envp);// if add new element in structure update!!!
-	// new_copy_env(&data, envp):
+	init_date(&data, envp);
 	signal(SIGINT, handler_ctrl_c);
 	while (argc && argv)
 	{
