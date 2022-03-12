@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:10:04 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/02/25 20:13:38 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 16:00:54 by hcharlsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,14 @@ int main(int argc, char **argv, char **envp)
 
 	init_date(&data, envp);
 	signal(SIGINT, handler_ctrl_c);
+	(void)argc;
+	(void)argv;
+
+//	test new parser
+//	data.line = ft_strdup("   ls  abc\"abc 'cde' dfg\"abc |      bgd   ");
+//	pars_input_str(&data);
+//	for(int i = 0; data.args[i]; i++)
+//		printf("%s\n", data.args[i]);
 	while (argc && argv)
 	{
 		data.line = readline("minishell > ");
@@ -108,7 +116,7 @@ int main(int argc, char **argv, char **envp)
 			printf("\b\bexit\n");
 			exit (1);
 		}
-		common_parsing(&data);
+		pars_input_str(&data);
 		my_programm(data.cmd->name_cmd, &data);
 		add_history(data.line);
 	}

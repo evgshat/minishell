@@ -19,7 +19,11 @@ UTILS		=	ft_memcpy.c\
                 ft_strdup.c\
                 ft_strjoin.c\
                 ft_strlen.c\
-                ft_strncmp.c
+                ft_strncmp.c\
+                ft_strtim.c\
+                ft_strrchr.c\
+                ft_strchr.c\
+                error_exit.c
 DIR_UTILS	=	utils/
 DIRS		=	$(DIR_UTILS)
 UTILS_PATH	=	$(addprefix $(DIR_UTILS), $(UTILS))
@@ -46,7 +50,8 @@ DIRS		+=	$(DIR_ENV)
 ENV_PATH	=	$(addprefix $(DIR_ENV), $(ENV))
 SRCS 		+= 	$(ENV_PATH)
 
-PARS		=	common_parsing.c
+PARS		=	common_parsing.c\
+				pars_input_str.c
 DIR_PARS	=	parsing/
 DIRS		+=	$(DIR_PARS)
 PARS_PATH	=	$(addprefix $(DIR_PARS), $(PARS))

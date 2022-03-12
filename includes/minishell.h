@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:07:48 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/02/25 20:41:52 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 12:21:55 by hcharlsi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int    fd_for_redirect(char *str, char *file, t_data *data);
 
 /* parsing */
 void	common_parsing(t_data *data);
+int		get_num_of_str(t_data* data);
+void	pars_input_str(t_data* data);
 
 /* my_shell */
 void my_programm(char **name_cmd, t_data *data);
