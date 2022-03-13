@@ -10,17 +10,24 @@ HDRS		=	functions.h\
 DIR_HDRS	=	includes/
 HDRS_PATH	=	$(addprefix $(DIR_HDRS), $(HDRS))
 
-FNCS		=	ft_memcpy.c\
+START		=	minishell.c
+SRCS		=	$(START)
+
+UTILS		=	ft_memcpy.c\
                 ft_putstr_fd.c\
                 ft_split.c\
                 ft_strdup.c\
                 ft_strjoin.c\
                 ft_strlen.c\
-                ft_strncmp.c
-DIR_FNCS	=	functions/
-DIRS		=	$(DIR_FNCS)
-FNCS_PATH	=	$(addprefix $(DIR_FNCS), $(FNCS))
-SRCS 		= 	$(FNCS_PATH)
+                ft_strncmp.c\
+                ft_strtim.c\
+                ft_strrchr.c\
+                ft_strchr.c\
+                error_exit.c
+DIR_UTILS	=	utils/
+DIRS		=	$(DIR_UTILS)
+UTILS_PATH	=	$(addprefix $(DIR_UTILS), $(UTILS))
+SRCS 		+= 	$(UTILS_PATH)
 
 
 CMDS		=	cmd_cd.c\
@@ -28,24 +35,33 @@ CMDS		=	cmd_cd.c\
                 cmd_export.c\
                 cmd_pwd.c\
                 cmd_unset.c\
-                cmd_exit.c\
-                copy_env.c\
-                creat_env_element.c\
                 exec_bin.c\
-                minishell.c\
-                my_programm.c\
-                new_copy_env.c\
-                redirect.c
-DIR_CMDS	=	sources/
+                my_programm.c
+DIR_CMDS	=	cmds/
 DIRS		+=	$(DIR_CMDS)
 CMDS_PATH	=	$(addprefix $(DIR_CMDS), $(CMDS))
 SRCS 		+= 	$(CMDS_PATH)
 
-PARS		=	common_parsing.c
+ENV			=	copy_env.c\
+                creat_env_element.c\
+                new_copy_env.c
+DIR_ENV		=	env/
+DIRS		+=	$(DIR_ENV)
+ENV_PATH	=	$(addprefix $(DIR_ENV), $(ENV))
+SRCS 		+= 	$(ENV_PATH)
+
+PARS		=	common_parsing.c\
+				pars_input_str.c
 DIR_PARS	=	parsing/
 DIRS		+=	$(DIR_PARS)
 PARS_PATH	=	$(addprefix $(DIR_PARS), $(PARS))
 SRCS 		+= 	$(PARS_PATH)
+
+REDIRECT		=	redirect.c
+DIR_REDIRECT	=	redirect/
+DIRS		+=	$(DIR_REDIRECT)
+REDIRECT_PATH	=	$(addprefix $(DIR_REDIRECT), $(REDIRECT))
+SRCS 		+= 	$(REDIRECT_PATH)
 
 DIR_OBJ 	=	objs/
 DIR_SRC		=	srcs/

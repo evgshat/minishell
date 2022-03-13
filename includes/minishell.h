@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:07:48 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/10 17:50:22 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/13 16:33:45 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void	cmd_export(char *str, t_env **envp);
 void	cmd_unset(char *str, t_env **sh_env);
 void	cmd_pwd(void);
 void	cmd_cd(char *str);
-void	cmd_echo(char **str);
-void	cmd_exit(void);
+void	cmd_echo(char *flag, char *str);
 
 /* execute my programm */
 void	exec_bin(char *str, t_env **sh_env);
@@ -114,13 +113,11 @@ int    fd_for_redirect(char *str, char *file, t_data *data);
 
 /* parsing */
 void	common_parsing(t_data *data);
-// int		is_cmd(t_data *data, char **mass);
+int		get_num_of_str(t_data* data);
+void	pars_input_str(t_data* data);
 
 /* my_shell */
 void my_programm(char **name_cmd, t_data *data);
-
-/* do reditect/pipe/execve */
-void run_redirect(t_data *data);
 
 
 #endif
