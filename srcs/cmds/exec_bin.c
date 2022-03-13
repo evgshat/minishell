@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static int count_var_sh_env(t_env **sh_env)
 {

@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static size_t	find_equal(char *str)
 {
@@ -17,16 +17,13 @@ char	*get_arg(char *str)
 	size_t	equal;
 	size_t	i;
 
-	i = 0;
+	i = -1;
 	equal = find_equal(str);
 	arg = (char *)malloc(equal + 1);
 	if (!arg)
 		exit(2);
-	while (i < equal)
-	{
+	while (++i < equal)
 		arg[i] = str[i];
-		i++;
-	}
 	arg[i] = '\0';
 	return (arg);
 }
@@ -56,7 +53,6 @@ t_env *new_env_elem(char *str, int v)
 	t_env	*elem;
 
 	elem = (t_env *)malloc(sizeof(t_env));
-	// elem = (t_env *)malloc(sizeof(t_env) + 1);
 	if (!elem)
 		exit(2);
 	elem->arg = get_arg(str);
