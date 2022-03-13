@@ -185,7 +185,7 @@ void run_redirect(t_data *data)
     }
 }
 
-void run_pipe(char **name_cmd, t_data *data)
+void run_pipe(char *name_cmd, t_data *data)
 {
     pid_t   pid;
     int fd[2];
@@ -200,35 +200,86 @@ void run_pipe(char **name_cmd, t_data *data)
         printf("its child\n");
         close (fd[0]);
         dup2(fd[1], 1);
-        run_cmd(name_cmd, data);
+        run_cmd(&name_cmd, data);
         run_redirect(data);
         // run_execve(data);
         exit(1);
     }
 }
-
-void my_programm(char **name_cmd, t_data *data)
+int	is_cmd(t_data *data, char *mass)
 {
-    t_data *temp;
+    if (ft_strncmp(mass, "cd", 3) == 0
+    || ft_strncmp(mass, "pwd", 4) == 0
+    || ft_strncmp(mass, "echo", 5) == 0
+    || ft_strncmp(mass, "exit", 5) == 0
+    || ft_strncmp(mass, "export", 7) == 0
+    || ft_strncmp(mass, "unset", 6) == 0
+    || ft_strncmp(mass, "env", 4) == 0
+    || ft_strncmp(mass, "./", 3) == 0)
+    {
+        data->cmd->is_cmd = 1;
+        return (1);
+    }
+	return (0);
+}
 
-    temp = data;
+int	is_pipe(t_data *data, char *mass)
+{
+    if (ft_strncmp(mass, "|", 2) == 0)
+    {
+        data->cmd->is_pipe = 1;
+        return (1);
+    }
+    return (0);
+}
+
+void my_programm(t_data *data)
+{
+	char **name_cmd;
+
+    name_cmd = data->args;
+
     while (*name_cmd)
     {
-        if (data->cmd->is_pipe > 0)
-        {
-            while (data->cmd->count_pipe != 0)
-            {
-                run_pipe(name_cmd, data);
-                wait(0);
-                data->cmd->count_pipe--;
-            }
-        }
-        if (data->cmd->is_redirect > 0)
+        if (is_pipe(data, *name_cmd) == 1)
+            run_pipe(*name_cmd, data);
+        // printf("check pipe\n");
+        if (is_redirect(data, *name_cmd) == 1)
             run_redirect(data);
+        // printf("check redirect\n");
+        if ((is_cmd(data, *name_cmd)) == 1)
+            run_cmd(name_cmd, data);
+        // printf("check cmd\n");
         run_execve(name_cmd, data);
-        run_cmd(name_cmd, data);
+        // printf("check execve\n");
         dup2(data->cmd->old_fd_out, 1);
         dup2(data->cmd->old_fd_in, 0);
         name_cmd = name_cmd + 1;
     }
 }
+
+// void my_programm(char **name_cmd, t_data *data)
+// {
+//     t_data *temp;
+
+//     temp = data;
+//     while (*name_cmd)
+//     {
+//         if (data->cmd->is_pipe > 0)
+//         {
+//             while (data->cmd->count_pipe != 0)
+//             {
+//                 run_pipe(name_cmd, data);
+//                 wait(0);
+//                 data->cmd->count_pipe--;
+//             }
+//         }
+//         if (data->cmd->is_redirect > 0)
+//             run_redirect(data);
+//         run_execve(name_cmd, data);
+//         run_cmd(name_cmd, data);
+//         dup2(data->cmd->, 1);
+//         dup2(data->cmd->old_fd_in, 0);
+//         name_cmd = name_cmd + 1;
+//     }
+// }

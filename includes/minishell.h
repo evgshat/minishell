@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:07:48 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/13 16:38:25 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/13 22:47:35 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,11 @@ void	cmd_export(char *str, t_env **envp);
 void	cmd_unset(char *str, t_env **sh_env);
 void	cmd_pwd(void);
 void	cmd_cd(char *str);
-void	cmd_echo(char *flag, char *str);
+void	cmd_echo(char **str);
+void	cmd_exit(void);
 
 /* execute my programm */
 void	exec_bin(char *str, t_env **sh_env);
-
-/* redirects */
-void    redirect(char *str, char *file, t_data *data);
-int    fd_for_redirect(char *str, char *file, t_data *data);
 
 /* parsing */
 void	common_parsing(t_data *data);
@@ -117,7 +114,15 @@ int		get_num_of_str(t_data* data);
 void	pars_input_str(t_data* data);
 
 /* my_shell */
-void my_programm(char **name_cmd, t_data *data);
+void	my_programm(t_data *data);
+
+/* check line*/
+int	is_redirect(t_data *data, char *mass);
+
+/* run */
+void run_pipe(char *name_cmd, t_data *data);
+void run_redirect(t_data *data);
+void run_cmd(char **name_cmd, t_data *data);
 
 
 #endif

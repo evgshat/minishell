@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:10:04 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/12 16:00:54 by hcharlsi         ###   ########.fr       */
+/*   Updated: 2022/03/13 22:08:07 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,11 @@ int main(int argc, char **argv, char **envp)
 			exit (1);
 		}
 		pars_input_str(&data);
-		my_programm(data.cmd->name_cmd, &data);
+		// int i = -1;
+
+		// while (data.args[++i])
+		// 	printf("%s\n", data.args[i]);
+		my_programm(&data);
 		add_history(data.line);
 	}
 	rl_clear_history();

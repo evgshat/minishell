@@ -24,7 +24,7 @@ static  void heredoc(char *stop)
     // прописать че делать, если line_in_heredock = NULL
 }
 
-int    fd_for_redirect(char *str, char *file, t_data *data)
+static int    fd_for_redirect(char *str, char *file, t_data *data)
 {
     if (ft_strncmp(str, "<", 2) == 0)
         data->cmd->fd_out = open(file, O_RDONLY);
@@ -36,30 +36,40 @@ int    fd_for_redirect(char *str, char *file, t_data *data)
     {
         heredoc("!");
         data->cmd->fd_out = open(file, O_RDONLY, MODE_FOR_FILE);
-        
+
     }
     return (data->cmd->fd_out);
 }
 
-// static  void change_file(char *str, char *file)
-// {
-//     int fd;
-
-//     fd = 0;
-//     fd = open(file, );
-// }
-
-void    redirect(char *str, char *file, t_data *data)
+static void is_l_redirect(t_data *data, char *mass)
 {
-    int fd;
+    if (ft_strncmp(mass, "<", 2) == 0)
+        data->cmd->is_left = 1;
+    else if (ft_strncmp(mass, "<<", 3) == 0)
+        data->cmd->is_dub_left = 1;
+    fd_for_redirect(mass, (mass + 1), data);
+}
 
-    fd = 0;
-    fd = fd_for_redirect(str, file, data);
-    if (fd == 0)
-    {
-        printf("error open\n");
-        exit(1);
-    }
-    printf("%d\n", fd);
-    // change_file();
+static void is_r_redirect(t_data *data, char *mass)
+{
+    if (ft_strncmp(mass, ">", 2) == 0)
+        data->cmd->is_right = 1;
+    else if (ft_strncmp(mass, ">>", 3) == 0)
+        data->cmd->is_dub_right = 1;
+    fd_for_redirect(mass, (mass + 1), data);
+}
+
+int	is_redirect(t_data *data, char *mass)
+{
+		if (ft_strncmp(mass, ">", 2) == 0 || ft_strncmp(mass, "<", 2) == 0
+		|| ft_strncmp(mass, ">>", 3) == 0 || ft_strncmp(mass, "<<", 3) == 0)
+		{
+			data->cmd->is_redirect = 1;
+            is_l_redirect(data, mass);
+            is_r_redirect(data, mass);
+            data->cmd->old_fd_in = dup(STDIN_FILENO);
+            data->cmd->old_fd_out = dup(STDOUT_FILENO);
+			return(1);
+		}
+	return (0);
 }

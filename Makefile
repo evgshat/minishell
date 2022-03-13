@@ -35,6 +35,7 @@ CMDS		=	cmd_cd.c\
                 cmd_export.c\
                 cmd_pwd.c\
                 cmd_unset.c\
+                cmd_exit.c\
                 exec_bin.c\
                 my_programm.c
 DIR_CMDS	=	cmds/

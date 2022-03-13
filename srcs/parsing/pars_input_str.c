@@ -28,7 +28,7 @@ int	get_num_of_str(t_data* data)
 			is_new_str = 1;
 			while(data->line[i] == ' ')
 				++i;
-		}
+		} // можно удалить этот if? т к есть ft_strtrim
 		if (IS_QUOTE(data->line[i]) && quote_flag == 0)
 		{
 			if (data->line[i] != ' ')
@@ -75,17 +75,17 @@ void	pars_input_str(t_data* data)
 	while(j < qnty_str)
 	{
 		if (data->line[i] == '\0')
-			data->args[j++] = ft_strdup(start_str);
+			data->args[j++] = ft_strdup(start_str); // ?...
 		if (data->line[i] == ' ' && quote_flag == 0)
 		{
-			end_str = &(data->line[i]);
+			end_str = &(data->line[i]); // ??
 			c = data->line[i];
 			*end_str = '\0';
 			if (is_new_str)
 				data->args[j++] = ft_strdup(start_str);
 			else
 			{
-				data->args[j++] = ft_strjoin(str_without_quotes, start_str);
+				data->args[j++] = ft_strjoin(str_without_quotes, start_str); // str_without_quotes init? null?
 				free(str_without_quotes);
 			}
 			*end_str = c;
