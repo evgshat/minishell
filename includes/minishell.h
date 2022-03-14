@@ -96,6 +96,7 @@ char	*get_arg(char *str);
 char	*get_value(char *str);
 void	copy_env(t_env **data, char **envp);
 void	env_print(t_env *data);
+void	update_init_date(t_data *data);
 
 /* cmd */
 void	cmd_export(char *str, t_env **envp);
@@ -103,6 +104,7 @@ void	cmd_unset(char *str, t_env **sh_env);
 void	cmd_pwd(void);
 void	cmd_cd(char *str);
 void	cmd_echo(char **str);
+void	cmd_echo_for_redirect(char **name_cmd);
 void	cmd_exit(void);
 
 /* execute my programm */
@@ -117,7 +119,8 @@ void	pars_input_str(t_data* data);
 void	my_programm(t_data *data);
 
 /* check line*/
-int	is_redirect(t_data *data, char *mass);
+int	is_redirect(t_data *data, char **mass);
+int find_redirect(t_data *data, char **mass);
 
 /* run */
 void run_pipe(char *name_cmd, t_data *data);

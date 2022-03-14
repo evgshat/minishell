@@ -14,36 +14,46 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6780b4a7-4346-40c8-9137-e80e83b20313" name="Default Changelist" comment="Makefile objs dir created, added silent, fixed small bugs">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_memcpy.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_memcpy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_putstr_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_putstr_fd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_split.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_split.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_strdup.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strdup.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_strjoin.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strjoin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_strlen.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strlen.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/ft_strncmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/functions/ft_strncmp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsing/common_parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parsing/common_parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/cmd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_cd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/cmd_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/cmd_export.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_export.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/cmd_pwd.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_pwd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/cmd_unset.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/cmd_unset.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/copy_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/copy_env.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/creat_env_element.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/creat_env_element.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/exec_bin.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/exec_bin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/minishell.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/my_programm.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/my_programm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/new_copy_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/new_copy_env.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/redirect.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/sources/redirect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/minishell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_cd.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_cd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_echo.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_echo.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_exit.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_exit.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_export.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_export.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_pwd.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_pwd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/cmd_unset.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/cmd_unset.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/exec_bin.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/exec_bin.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/cmds/my_programm.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/cmds/my_programm.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/env/copy_env.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/env/copy_env.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/env/creat_env_element.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/env/creat_env_element.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/env/new_copy_env.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/env/new_copy_env.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/minishell.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/minishell.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/parsing/common_parsing.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/parsing/common_parsing.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/parsing/pars_input_str.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/parsing/pars_input_str.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/redirect/redirect.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/redirect/redirect.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/error_exit.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/error_exit.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_memcpy.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_memcpy.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_putstr_fd.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_putstr_fd.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_split.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_split.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strchr.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strchr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strdup.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strdup.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strjoin.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strjoin.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strlen.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strlen.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strncmp.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strncmp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strrchr.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strrchr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils/ft_strtim.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils/ft_strtim.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/cmds/cmd_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/cmds/cmd_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/cmds/my_programm.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/cmds/my_programm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/minishell.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/parsing/pars_input_str.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/parsing/pars_input_str.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcs/redirect/redirect.c" beforeDir="false" afterPath="$PROJECT_DIR$/srcs/redirect/redirect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,77 +111,26 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/srcs" />
     </key>
   </component>
-  <component name="RunManager" selected="Makefile Target.Makefile (1)">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="evgshat_minishell" TARGET_NAME="all" CONFIG_NAME="all" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="fclean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="evgshat_minishell" TARGET_NAME="fclean" CONFIG_NAME="fclean" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="minishell" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="evgshat_minishell" TARGET_NAME="minishell" CONFIG_NAME="minishell" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="re" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="evgshat_minishell" TARGET_NAME="re" CONFIG_NAME="re" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="write_logo" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="evgshat_minishell" TARGET_NAME="write_logo" CONFIG_NAME="write_logo" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Makefile (1)" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="" workingDirectory="" arguments="">
-        <envs />
-      </makefile>
-      <method v="2" />
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/minishell">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="Makefile" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="" workingDirectory="" arguments="">
-        <envs />
-      </makefile>
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Makefile Application.all" />
-      <item itemvalue="Makefile Application.fclean" />
-      <item itemvalue="Makefile Application.re" />
-      <item itemvalue="Makefile Application.write_logo" />
-      <item itemvalue="Makefile Application.minishell" />
-      <item itemvalue="Makefile Target.Makefile" />
-      <item itemvalue="Makefile Target.Makefile (1)" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Makefile Target.Makefile (1)" />
-        <item itemvalue="Makefile Target.Makefile" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -182,6 +141,13 @@
       <option name="presentableId" value="Default" />
       <updated>1646837756214</updated>
       <workItem from="1646837762939" duration="7373000" />
+      <workItem from="1647274979187" duration="17000" />
+      <workItem from="1647275003104" duration="79000" />
+      <workItem from="1647275091906" duration="13000" />
+      <workItem from="1647275138642" duration="27000" />
+      <workItem from="1647275194639" duration="9000" />
+      <workItem from="1647275232101" duration="31000" />
+      <workItem from="1647275270900" duration="147000" />
     </task>
     <task id="LOCAL-00001" summary="Makefile objs dir created, added silent, fixed small bugs">
       <created>1646854286184</created>

@@ -19,26 +19,23 @@ int	check_cmd(char *name_cmd)
 
 void run_cmd(char **name_cmd, t_data *data)
 {
-    if (data->cmd->is_cmd == 1)
-    {
-        if (ft_strncmp(*name_cmd, "exit", 5) == 0)
-            cmd_exit();
-        if (ft_strncmp(*name_cmd, "env", 4) == 0)
-            env_print(data->sh_env);
-        if (ft_strncmp(*name_cmd, "export", 7) == 0)
-            cmd_export(*(name_cmd + 1), &data->sh_env);
-        if (ft_strncmp(*name_cmd, "unset", 7) == 0)
-            cmd_unset(*(name_cmd + 1), &data->sh_env);
-        if (ft_strncmp(*name_cmd, "pwd", 4) == 0)
-            cmd_pwd();
-        if (ft_strncmp(*name_cmd, "cd", 3) == 0)
-            cmd_cd(*(name_cmd + 1));
-        if (ft_strncmp(*name_cmd, "echo", 5) == 0)
-            cmd_echo(name_cmd);
-        if (ft_strncmp(*name_cmd, "./", 3) == 0)
-            exec_bin(*(name_cmd + 1), &data->sh_env);
-    }
-    // printf("end cmd\n");
+    // if (data->cmd->is_cmd == 1) // (data->cmd->is_cmd == 1 && data->cmd->is_redirect == 0)
+    if (ft_strncmp(*name_cmd, "exit", 5) == 0)
+        cmd_exit();
+    else if (ft_strncmp(*name_cmd, "env", 4) == 0)
+        env_print(data->sh_env);
+    else if (ft_strncmp(*name_cmd, "export", 7) == 0)
+        cmd_export(*(name_cmd + 1), &data->sh_env);
+    else if (ft_strncmp(*name_cmd, "unset", 7) == 0)
+        cmd_unset(*(name_cmd + 1), &data->sh_env);
+    else if (ft_strncmp(*name_cmd, "pwd", 4) == 0)
+        cmd_pwd();
+    else if (ft_strncmp(*name_cmd, "cd", 3) == 0)
+        cmd_cd(*(name_cmd + 1));
+    else if (ft_strncmp(*name_cmd, "echo", 5) == 0)
+        cmd_echo(name_cmd);
+    else if (ft_strncmp(*name_cmd, "./", 3) == 0)
+        exec_bin(*(name_cmd + 1), &data->sh_env);
 }
 
 char *find_path_ex(char *all_path, char *prog_name)
@@ -163,26 +160,10 @@ void run_execve(char **name_cmd, t_data *data)
         path = value_from_env("PATH\0", data->sh_env, *name_cmd);
         temp = env_for_ex;
         execve(path, argv, env_for_ex);
-
+        exit(1);
     }
-    waitpid(pid, 0, 0); // поменять второй ноль (на код завершения программы для execve)
-}
-
-void run_redirect(t_data *data)
-{
-    if (data->cmd->is_redirect == 1)
-    {
-        if (data->cmd->is_right == 1 || data->cmd->is_dub_right == 1)
-        {
-            dup2(data->cmd->fd_out, 1);
-            close(data->cmd->fd_out);
-        }
-        else if (data->cmd->is_left == 1 || data->cmd->is_dub_left == 1)
-        {
-            dup2(data->cmd->fd_in, 0);
-            close(data->cmd->fd_in);
-        }
-    }
+    // wait();
+    // waitpid(pid, 0, 0); // поменять второй ноль (на код завершения программы для execve)
 }
 
 void run_pipe(char *name_cmd, t_data *data)
@@ -206,20 +187,22 @@ void run_pipe(char *name_cmd, t_data *data)
         exit(1);
     }
 }
-int	is_cmd(t_data *data, char *mass)
+
+int	is_cmd(t_data *data, char **mass)
 {
-    if (ft_strncmp(mass, "cd", 3) == 0
-    || ft_strncmp(mass, "pwd", 4) == 0
-    || ft_strncmp(mass, "echo", 5) == 0
-    || ft_strncmp(mass, "exit", 5) == 0
-    || ft_strncmp(mass, "export", 7) == 0
-    || ft_strncmp(mass, "unset", 6) == 0
-    || ft_strncmp(mass, "env", 4) == 0
-    || ft_strncmp(mass, "./", 3) == 0)
+    if (ft_strncmp(*mass, "cd", 3) == 0
+    || ft_strncmp(*mass, "pwd", 4) == 0
+    || ft_strncmp(*mass, "echo", 5) == 0
+    || ft_strncmp(*mass, "exit", 5) == 0
+    || ft_strncmp(*mass, "export", 7) == 0
+    || ft_strncmp(*mass, "unset", 6) == 0
+    || ft_strncmp(*mass, "env", 4) == 0
+    || ft_strncmp(*mass, "./", 3) == 0)
     {
         data->cmd->is_cmd = 1;
         return (1);
     }
+    // check_on_red_or_pipe();
 	return (0);
 }
 
@@ -236,6 +219,7 @@ int	is_pipe(t_data *data, char *mass)
 void my_programm(t_data *data)
 {
 	char **name_cmd;
+    int count;
 
     name_cmd = data->args;
 
@@ -243,43 +227,24 @@ void my_programm(t_data *data)
     {
         if (is_pipe(data, *name_cmd) == 1)
             run_pipe(*name_cmd, data);
-        // printf("check pipe\n");
-        if (is_redirect(data, *name_cmd) == 1)
+        count = find_redirect(data, name_cmd);
+        printf("%d\n", count);
+        if (count > 0)
+        {
             run_redirect(data);
-        // printf("check redirect\n");
-        if ((is_cmd(data, *name_cmd)) == 1)
             run_cmd(name_cmd, data);
-        // printf("check cmd\n");
-        run_execve(name_cmd, data);
-        // printf("check execve\n");
+            name_cmd = name_cmd + count + 2;
+            // printf("after_find_redirect = %s\n", *name_cmd);
+        }
+        if ((is_cmd(data, name_cmd)) == 1)
+            run_cmd(name_cmd, data);
+        // run_execve(name_cmd, data);
+        // wait(0);
         dup2(data->cmd->old_fd_out, 1);
         dup2(data->cmd->old_fd_in, 0);
+        update_init_date(data);
         name_cmd = name_cmd + 1;
+        // printf(" = %s\n", *name_cmd); 
+        add_history(data->line);
     }
 }
-
-// void my_programm(char **name_cmd, t_data *data)
-// {
-//     t_data *temp;
-
-//     temp = data;
-//     while (*name_cmd)
-//     {
-//         if (data->cmd->is_pipe > 0)
-//         {
-//             while (data->cmd->count_pipe != 0)
-//             {
-//                 run_pipe(name_cmd, data);
-//                 wait(0);
-//                 data->cmd->count_pipe--;
-//             }
-//         }
-//         if (data->cmd->is_redirect > 0)
-//             run_redirect(data);
-//         run_execve(name_cmd, data);
-//         run_cmd(name_cmd, data);
-//         dup2(data->cmd->, 1);
-//         dup2(data->cmd->old_fd_in, 0);
-//         name_cmd = name_cmd + 1;
-//     }
-// }
