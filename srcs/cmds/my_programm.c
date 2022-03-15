@@ -166,7 +166,7 @@ void run_execve(char **name_cmd, t_data *data)
     // waitpid(pid, 0, 0); // поменять второй ноль (на код завершения программы для execve)
 }
 
-void run_pipe(char *name_cmd, t_data *data)
+void run_pipe(char **name_cmd, t_data *data)
 {
     pid_t   pid;
     int fd[2];
@@ -181,60 +181,175 @@ void run_pipe(char *name_cmd, t_data *data)
         printf("its child\n");
         close (fd[0]);
         dup2(fd[1], 1);
-        run_cmd(&name_cmd, data);
+        run_cmd(name_cmd, data);
         run_redirect(data);
-        // run_execve(data);
+        run_execve(name_cmd, data);
         exit(1);
     }
 }
 
 int	is_cmd(t_data *data, char **mass)
 {
-    if (ft_strncmp(*mass, "cd", 3) == 0
-    || ft_strncmp(*mass, "pwd", 4) == 0
-    || ft_strncmp(*mass, "echo", 5) == 0
-    || ft_strncmp(*mass, "exit", 5) == 0
-    || ft_strncmp(*mass, "export", 7) == 0
-    || ft_strncmp(*mass, "unset", 6) == 0
-    || ft_strncmp(*mass, "env", 4) == 0
-    || ft_strncmp(*mass, "./", 3) == 0)
+    // printf("mass = %s\n", *mass);
+    if (*mass != NULL)
     {
-        data->cmd->is_cmd = 1;
-        return (1);
+        if (ft_strncmp(*mass, "cd", 3) == 0
+        || ft_strncmp(*mass, "pwd", 4) == 0
+        || ft_strncmp(*mass, "echo", 5) == 0
+        || ft_strncmp(*mass, "exit", 5) == 0
+        || ft_strncmp(*mass, "export", 7) == 0
+        || ft_strncmp(*mass, "unset", 6) == 0
+        || ft_strncmp(*mass, "env", 4) == 0
+        || ft_strncmp(*mass, "./", 3) == 0)
+        {
+            data->cmd->is_cmd = 1;
+            return (1);
+        }
     }
-    // check_on_red_or_pipe();
 	return (0);
 }
 
-int	is_pipe(t_data *data, char *mass)
+int	find_pipe(t_data *data, char **mass)
 {
-    if (ft_strncmp(mass, "|", 2) == 0)
+    char **temp;
+    int    res;
+
+    temp = mass;
+    res = 0;
+    while (*temp)
     {
-        data->cmd->is_pipe = 1;
-        return (1);
+        if (ft_strncmp(*temp, "|", 2) == 0)
+        {
+            data->cmd->is_pipe = 1;
+            return (res);
+        }
+        temp = temp + 1;
+        res++;
     }
     return (0);
+}
+
+void    init_pipe(t_pipe *pip)
+{
+    pip->count_world_first = 1;
+    pip->count_world_second = 1;
+    pip->count_world_all = 1;
+    pip->first_argv = NULL;
+    pip->second_argv = NULL;
+}
+void    create_params_for_pipe(char **mass, t_pipe *pip)
+{
+
+    char **temp;
+    int i;
+    int j;
+
+    temp = mass;
+    i = -1;
+    pip = malloc(sizeof(t_pipe) * 1);
+    if (pip == NULL)
+    {
+        printf("error_malloc\n");
+        exit (1);
+    }
+    init_pipe(pip);
+    while (ft_strncmp(temp[++i], "|", 2) != 0)
+        pip->count_world_first++;
+    pip->first_argv = malloc(sizeof(char *) * pip->count_world_first);
+    if (pip->first_argv == NULL)
+    {
+        printf("error_malloc\n");
+        exit (1);
+    }
+    i = -1;
+    // printf("its ok\n");
+    while (ft_strncmp(temp[++i], "|", 2) != 0)
+    {
+        pip->len_first = ft_strlen(temp[i]) + 1;
+        pip->first_argv[i] = malloc(sizeof(char) * pip->len_first);
+        pip->first_argv[i] = ft_strdup(temp[i]);
+        // printf("%s\n", pip->first_argv[i]);
+        pip->count_world_all++;
+    }
+    i++;
+    pip->first_argv[i] = NULL;
+    i = 0; // its ok
+
+    while (ft_strncmp(temp[i], "|", 2) != 0)
+        i++;
+    i++;
+    j = 1;
+    while (temp[i] != NULL)
+    {
+        pip->count_world_second++;
+        i++;
+        j++;
+    }
+    printf("%d\n",  pip->count_world_second);
+    pip->second_argv = malloc(sizeof(char *) * pip->count_world_second);
+    if (pip->second_argv == NULL)
+    {
+        printf("error_malloc\n");
+        exit (1);
+    }
+    while (ft_strncmp(temp[j], "|", 2) != 0 && temp[j])
+    {
+        pip->len_second = ft_strlen(temp[j]) + 1;
+        pip->second_argv[j] = malloc(sizeof(char) * pip->len_second);
+        pip->second_argv[j] = ft_strdup(temp[j]);
+        // printf("%s\n", pip->second_argv[j]);
+        // pip->count_world_all++;
+        j++;
+    }
+    // j++;
+    pip->second_argv[j] = NULL;
 }
 
 void my_programm(t_data *data)
 {
 	char **name_cmd;
     int count;
+    t_pipe *pip;
+    // char **temp_first_pipe;
+    // char **temp_second_pipe;
 
     name_cmd = data->args;
+    pip = NULL;
 
-    while (*name_cmd)
-    {
-        if (is_pipe(data, *name_cmd) == 1)
-            run_pipe(*name_cmd, data);
+    // while (*name_cmd)
+    // {
+        count = find_pipe(data, name_cmd);
+        if (count > 0)
+        {
+            // printf("count = %d\n", count);
+            create_params_for_pipe(name_cmd, pip);
+            printf("its ok\n");
+            // temp_first_pipe = pip->first_argv;
+            // temp_second_pipe = pip->second_argv;
+            // printf("first_pipe:\n");
+            // while (*temp_first_pipe)
+            // {
+            //     printf("%s\n", *temp_first_pipe);
+            //     temp_first_pipe = temp_first_pipe + 1;
+            // }
+            // printf("second_pipe:\n");
+            // while (*temp_second_pipe)
+            // {
+            //     printf("%s\n", *temp_second_pipe);
+            //     temp_second_pipe = temp_second_pipe + 1;
+            // }
+            // printf("count_of_pipe: %d\n", pip->count_world_all);
+            // run_pipe(name_cmd, data);
+            // name_cmd = name_cmd + count + 2; // доработать и вернуть
+            // printf("%s\n", *name_cmd);
+        }
         count = find_redirect(data, name_cmd);
-        printf("%d\n", count);
         if (count > 0)
         {
             run_redirect(data);
             run_cmd(name_cmd, data);
+            // data->cmd->fd_out = 1;
             name_cmd = name_cmd + count + 2;
-            // printf("after_find_redirect = %s\n", *name_cmd);
         }
         if ((is_cmd(data, name_cmd)) == 1)
             run_cmd(name_cmd, data);
@@ -244,7 +359,7 @@ void my_programm(t_data *data)
         dup2(data->cmd->old_fd_in, 0);
         update_init_date(data);
         name_cmd = name_cmd + 1;
-        // printf(" = %s\n", *name_cmd); 
-        add_history(data->line);
-    }
+        // printf(" = %s\n", *name_cmd);
+
+    // }
 }

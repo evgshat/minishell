@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:10:04 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/13 22:08:07 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 03:57:17 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,18 @@ int main(int argc, char **argv, char **envp)
 
 	init_date(&data, envp);
 	signal(SIGINT, handler_ctrl_c);
-	si[0] = 'e';
-	si[1] = 'c';
-	si[2] = 'h';
-	si[3] = 'o';
-	si[4] = ' ';
-	si[5] = 'e';
-	si[6] = ' ';
-	si[7] = '>';
-	si[8] = ' ';
-	si[9] = 'q';
-	// while (argc && argv)
-	// {
+	// si[0] = 'a';
+	// si[1] = ' ';
+	// si[2] = '|';
+	// si[3] = ' ';
+	// si[4] = 'b';
+	// si[5] = 'e';
+	// si[6] = ' ';
+	// si[7] = '>';
+	// si[8] = ' ';
+	// si[9] = 'q';
+	while (argc && argv)
+	{
 		data.line = readline("minishell > ");
 		if (data.line == NULL)
 		{
@@ -124,7 +124,8 @@ int main(int argc, char **argv, char **envp)
 		// while (data.args[++i])
 		// 	printf("%s\n", data.args[i]);
 		my_programm(&data);
-	// }
+		add_history(data.line);
+	}
 	rl_clear_history();
 	return (0);
 }

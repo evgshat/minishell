@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 17:07:48 by bcaffere          #+#    #+#             */
-/*   Updated: 2022/03/13 22:47:35 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 02:58:30 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ typedef struct s_data
 	// t_bin	*bin;
 }	t_data;
 
+typedef struct s_pipe
+{
+	char	**argv;
+	int		count_world_all;
+	char	**first_argv;
+	char	**second_argv;
+	int		len_first;
+	int		len_second;
+	int		count_world_first;
+	int		count_world_second;
+
+}	t_pipe;
 
 /* for execute not my programm */
 char 	**convert_sh_env(t_env **sh_env);
@@ -123,7 +135,7 @@ int	is_redirect(t_data *data, char **mass);
 int find_redirect(t_data *data, char **mass);
 
 /* run */
-void run_pipe(char *name_cmd, t_data *data);
+void run_pipe(char **name_cmd, t_data *data);
 void run_redirect(t_data *data);
 void run_cmd(char **name_cmd, t_data *data);
 

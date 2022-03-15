@@ -34,7 +34,7 @@ static void    fd_for_redirect(char *str, char *file, t_data *data)
          data->cmd->fd_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, MODE_FOR_FILE);
         //   printf("fd_out = %d\n", data->cmd->fd_out);
     }
-       
+
     else if (ft_strncmp(str, ">>", 3) == 0)
         data->cmd->fd_out = open(file, O_CREAT | O_APPEND | O_WRONLY, MODE_FOR_FILE);
     else if (ft_strncmp(str, "<<", 3) == 0)
@@ -51,7 +51,7 @@ static void is_l_redirect(t_data *data, char **mass)
     {
         data->cmd->is_left = 1;
         fd_for_redirect(*mass, *(mass + 1), data);
-    } 
+    }
     else if (ft_strncmp(*mass, "<<", 3) == 0)
     {
          data->cmd->is_dub_left = 1;
@@ -71,21 +71,6 @@ static void is_r_redirect(t_data *data, char **mass)
         data->cmd->is_dub_right = 1;
         fd_for_redirect(*mass, *(mass + 1), data);
     }
-}
-
-int	is_redirect(t_data *data, char **mass)
-{
-    if (ft_strncmp(*mass, ">", 2) == 0 || ft_strncmp(*mass, "<", 2) == 0
-    || ft_strncmp(*mass, ">>", 3) == 0 || ft_strncmp(*mass, "<<", 3) == 0)
-    {
-        data->cmd->is_redirect = 1;
-        is_l_redirect(data, mass);
-        is_r_redirect(data, mass);
-        data->cmd->old_fd_in = dup(STDIN_FILENO);
-        data->cmd->old_fd_out = dup(STDOUT_FILENO);
-        return(1);
-    }
-	return (0);
 }
 
 int find_redirect(t_data *data, char **mass)
@@ -110,7 +95,7 @@ int find_redirect(t_data *data, char **mass)
         temp = temp + 1;
         res++;
     }
-    return (res);
+    return (0);
 }
 
 void run_redirect(t_data *data)

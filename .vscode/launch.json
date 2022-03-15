@@ -4,7 +4,7 @@
         "name": "(lldb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "/Users/lcharlet/Desktop/minishell/minishell",
+        "program": "/Users/a19060383/Desktop/minishell/minishell",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
